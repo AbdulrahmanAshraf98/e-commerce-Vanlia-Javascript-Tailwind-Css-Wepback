@@ -36,7 +36,12 @@ export const getProductsByCategory = async (categoryName) => {
 		const responseData = await fetchFromFakeStoreApi(
 			`products/category/${categoryName}`,
 		);
-		state.productsData = responseData;
+		state.productsData = responseData.map((product) => {
+			return {
+				...product,
+				price: parseInt(product.price),
+			};
+		});
 	} catch (error) {}
 };
 export const addToCart = (productItem) => {
