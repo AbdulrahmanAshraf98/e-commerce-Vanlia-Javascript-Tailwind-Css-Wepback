@@ -9,10 +9,14 @@ export const state = {
 export const loadProducts = async () => {
 	try {
 		const responseData = await fetchFromFakeStoreApi("products");
-		state.productsData = responseData.map((product) => ({
-			...product,
-			price: parseInt(product.price),
-		}));
+		
+		state.productsData = responseData.map((product) => {
+			return {
+				...product,
+				price: parseInt(product.price),
+			};
+		});
+		
 	} catch (error) {}
 };
 export const loadProductDetails = async (id) => {
