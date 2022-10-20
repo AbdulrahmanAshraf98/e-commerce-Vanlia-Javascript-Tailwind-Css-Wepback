@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @layer components{
+
     .btn{
         @apply
         px-4 py-2  text-white border-none rounded-md
@@ -10,8 +11,32 @@
         @apply
         bg-btn
     }
+    .cart{
+
+        visibility:hidden;
+        @apply
+        fixed top-0 left-0 
+        h-full w-full 
+        bg-cart
+        opacity-0  translate-x-full   duration-500 
+    }
+    .cart.show{
+        visibility:visible;
+        @apply
+        opacity-100  translate-x-0  
+        
+    }
+    .cart .cart__content{
+        @apply 
+        w-80 h-full
+        absolute right-0 top-0
+        px-8 py-4
+        flex flex-col
+        bg-white 
+        overflow-y-auto
+    }
     .product-card{
-        @apply  my-4
+        @apply  my-4 shadow-md shadow-neutral-700
     }
     .product-card .product-image {
         @apply

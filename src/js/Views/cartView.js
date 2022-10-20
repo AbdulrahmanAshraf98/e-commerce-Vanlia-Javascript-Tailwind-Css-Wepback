@@ -10,7 +10,7 @@ class Cart extends View {
 	}
 	_generateMarkupView(cart) {
 		return `
-        <aside class="cart__content bg-white w-80 h-full absolute right-0 top-0 px-8 py-4 flex flex-col overflow-y-auto">
+        <aside class="cart__content ">
         <div class="cart__heading my-4 flex gap-4 items-center">
             <div class="cart__title text-2xl text-gray-700 font-bold ">Cart</div>
             <div class="cart__total text-lg text-gray-500 ">${cart.reduce(
@@ -76,14 +76,13 @@ class Cart extends View {
 		});
 	}
 	openCart() {
-		if (this._parentElement.classList.contains("hidden"))
-			this._parentElement.classList.remove("hidden");
+		this._parentElement.classList.add("show");
 	}
 	closeCart() {
 		this._parentElement.addEventListener("click", (event) => {
 			const btn = event.target.closest(".close-btn");
 			if (!btn) return;
-			this._parentElement.classList.add("hidden");
+			this._parentElement.classList.remove("show");
 		});
 	}
 }
