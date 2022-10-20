@@ -22,7 +22,7 @@ class CategoriesView extends View {
 			activeButtonId === categoryItem.id ? "bg-black" : "primary"
 		} w-full sm:w-max   hover:bg-black duration-500" data-id="${
 			index + 1
-		}" data-name="${categoryItem}">${categoryItem.name}</a> </div> `;
+		}" data-name="${categoryItem.name}">${categoryItem.name}</a> </div> `;
 	}
 
 	addRenderHandler(handler) {
