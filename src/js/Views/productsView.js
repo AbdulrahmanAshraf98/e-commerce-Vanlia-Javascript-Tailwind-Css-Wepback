@@ -34,6 +34,7 @@ class ProductsView extends View {
 	}
 	addRenderHandler(handler) {
 		window.addEventListener("load", handler);
+		window.addEventListener("hashchange", handler);
 	}
 	addToCartHandler(handler) {
 		this._parentElement.addEventListener("click", (event) => {

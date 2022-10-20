@@ -14,8 +14,11 @@ import categoriesView from "./Views/catogriesView";
 import cartView from "./Views/cartView";
 
 const productsController = async () => {
-	await loadProducts();
+	const categoryName = window.location.hash.slice(1).replace("%20", " ");
+	if (!categoryName || categoryName === "All") await loadProducts();
+	else await getProductsByCategory(categoryName);
 	productsView.render(state.productsData);
+	categoriesView.render(state.Categories);
 };
 const categoriesController = async () => {
 	await getALlCategories();
@@ -56,7 +59,6 @@ const init = () => {
 	productsView.addRenderHandler(productsController);
 	categoriesView.addRenderHandler(categoriesController);
 	productsView.addToCartHandler(addToCartController);
-	categoriesView.addFilterByHandler(filterByCategoryHandler);
 	cartView.addToCartHandler(addToCartController);
 	cartView.removeFromCartHandler(removeFromCartController);
 	cartView.deleteFromCartHandler(deleteProductFromCart);
