@@ -12,7 +12,7 @@ class ProductView extends View {
         <section class="product py-4 sm:py-0">
             <div class="container m-auto px-4  sm:py-8 h-screen relative">
                 <button class="btn absolute top:0 left-5 sm:top-10 sm:left-10 close-model-btn mb-4 text-4xl text-gray-800">x</button>
-                <div class="flex flex-wrap gap-16 items-center h-full  bg-white  p-8  overflow-y-auto overflow-x-hidden ">
+                <div class="flex flex-wrap gap-16 items-center h-screen  bg-white  p-8  overflow-y-auto overflow-x-hidden ">
                     
                     <div class="w-full sm:w-3/12">
                         <div class="product-image  ">
