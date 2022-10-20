@@ -61,6 +61,7 @@ export const addToCart = (productItem) => {
 		newCartItems[existingCartItemIndex] = updateExistingCartItem;
 	}
 	state.cartItems = newCartItems;
+	localStorage.setItem("cartItems", JSON.stringify(newCartItems));
 };
 export const removeFromCart = (id) => {
 	let newCartItems = [];
@@ -79,10 +80,17 @@ export const removeFromCart = (id) => {
 		newCartItems = state.cartItems.filter((cartItem) => cartItem.id !== +id);
 	}
 	state.cartItems = newCartItems;
+	localStorage.setItem("cartItems", JSON.stringify(newCartItems));
 };
 export const deleteFromCart = (id) => {
 	const newCartItems = state.cartItems.filter(
 		(cartItem) => cartItem.id !== +id,
 	);
 	state.cartItems = newCartItems;
+	localStorage.setItem("cartItems", JSON.stringify(newCartItems));
 };
+const init = () => {
+	const cartStorage = localStorage.getItem("cartItems");
+	if (cartStorage) state.cartItems = JSON.parse(cartStorage);
+};
+init();
