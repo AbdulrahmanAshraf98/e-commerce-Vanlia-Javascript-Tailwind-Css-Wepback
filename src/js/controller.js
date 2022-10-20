@@ -16,15 +16,24 @@ import modalView from "./Views/modalView";
 import productView from "./Views/productView";
 
 const productsController = async () => {
-	const categoryName = window.location.hash.slice(1).replace("%20", " ");
-	if (!categoryName || categoryName === "All") await loadProducts();
-	else await getProductsByCategory(categoryName);
-	productsView.render(state.productsData);
-	categoriesView.render(state.Categories);
+	try {
+		const categoryName = window.location.hash.slice(1).replace("%20", " ");
+		productsView.renderSpinner();
+		if (!categoryName || categoryName === "All") await loadProducts();
+		else await getProductsByCategory(categoryName);
+		productsView.render(state.productsData);
+		categoriesView.render(state.Categories);
+	} catch (error) {
+		productsView.renderErrorMessage(error);
+	}
 };
 const categoriesController = async () => {
-	await getALlCategories();
-	categoriesView.render(state.Categories);
+	try {
+		await getALlCategories();
+		categoriesView.render(state.Categories);
+	} catch (error) {
+		categoriesView.renderErrorMessage(error);
+	}
 };
 
 const getProduct = (id) => {
@@ -34,19 +43,15 @@ const getProduct = (id) => {
 	const productItem = state.productsData[productItemIndex];
 	return productItem;
 };
-const filterByCategoryHandler = async (categoryName) => {
-	if (categoryName === "All") {
-		await loadProducts();
-	} else {
-		await getProductsByCategory(categoryName);
-	}
-	productsView.render(state.productsData);
-	categoriesView.render(state.Categories);
-};
 const viewProductController = async (id) => {
-	modalView.openModal();
-	await loadProductDetails(id);
-	productView.render(state.productDetails);
+	try {
+		modalView.openModal();
+		productView.renderSpinner();
+		await loadProductDetails(id);
+		productView.render(state.productDetails);
+	} catch (error) {
+		productView.renderErrorMessage(error);
+	}
 };
 const addToCartController = (id) => {
 	const productItem = getProduct(id);

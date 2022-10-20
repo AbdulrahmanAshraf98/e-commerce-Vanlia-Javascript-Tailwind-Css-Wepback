@@ -9,27 +9,32 @@ export const state = {
 export const loadProducts = async () => {
 	try {
 		const responseData = await fetchFromFakeStoreApi("products");
-		
+
 		state.productsData = responseData.map((product) => {
 			return {
 				...product,
 				price: parseInt(product.price),
 			};
 		});
-		
-	} catch (error) {}
+	} catch (error) {
+		throw new Error(error.message);
+	}
 };
 export const loadProductDetails = async (id) => {
 	try {
 		const responseData = await fetchFromFakeStoreApi(`products/${id}`);
 		state.productDetails = responseData;
-	} catch (error) {}
+	} catch (error) {
+		throw new Error(error.message);
+	}
 };
 export const getALlCategories = async () => {
 	try {
 		const responseData = await fetchFromFakeStoreApi("products/categories");
 		state.Categories = responseData;
-	} catch (error) {}
+	} catch (error) {
+		throw new Error(error.message);
+	}
 };
 export const getProductsByCategory = async (categoryName) => {
 	try {
@@ -42,7 +47,9 @@ export const getProductsByCategory = async (categoryName) => {
 				price: parseInt(product.price),
 			};
 		});
-	} catch (error) {}
+	} catch (error) {
+		throw new Error(error.message);
+	}
 };
 export const addToCart = (productItem) => {
 	let newCartItems = [];
