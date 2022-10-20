@@ -23,12 +23,14 @@ class ProductsView extends View {
 			<p class="product-desc">${productItem.description.slice(0, 100)}</p>
            <div class="flex  items-center justify-between mt-3">  
 		    <p class="product-price">$${productItem.price}</p>
-            
-		   <button class="addToCart-btn btn primary"data-id="${
-					productItem.id
-				}">Add To Cart</button></div>
-               
-        </div>
+            <button class="view-product-btn btn text-white"data-id="${
+							productItem.id
+						}">View</button>
+						<button class="addToCart-btn btn primary"data-id="${
+							productItem.id
+						}">Add To Cart</button>
+			</div>
+       	 </div>
     </div>
     </div>`;
 	}
@@ -39,6 +41,13 @@ class ProductsView extends View {
 	addToCartHandler(handler) {
 		this._parentElement.addEventListener("click", (event) => {
 			const btn = event.target.closest(".addToCart-btn");
+			if (!btn) return;
+			handler(btn.dataset.id);
+		});
+	}
+	viewProductHandler(handler) {
+		this._parentElement.addEventListener("click", (event) => {
+			const btn = event.target.closest(".view-product-btn");
 			if (!btn) return;
 			handler(btn.dataset.id);
 		});

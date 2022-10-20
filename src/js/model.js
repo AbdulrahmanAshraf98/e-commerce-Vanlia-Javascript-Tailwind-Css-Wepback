@@ -21,7 +21,7 @@ export const loadProducts = async () => {
 };
 export const loadProductDetails = async (id) => {
 	try {
-		const responseData = await fetchFromFakeStoreApi("products/${id}");
+		const responseData = await fetchFromFakeStoreApi(`products/${id}`);
 		state.productDetails = responseData;
 	} catch (error) {}
 };

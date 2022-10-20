@@ -12,6 +12,8 @@ import "../css/style.css";
 import productsView from "./Views/productsView";
 import categoriesView from "./Views/catogriesView";
 import cartView from "./Views/cartView";
+import modalView from "./Views/modalView";
+import productView from "./Views/productView";
 
 const productsController = async () => {
 	const categoryName = window.location.hash.slice(1).replace("%20", " ");
@@ -41,6 +43,11 @@ const filterByCategoryHandler = async (categoryName) => {
 	productsView.render(state.productsData);
 	categoriesView.render(state.Categories);
 };
+const viewProductController = async (id) => {
+	modalView.openModal();
+	await loadProductDetails(id);
+	productView.render(state.productDetails);
+};
 const addToCartController = (id) => {
 	const productItem = getProduct(id);
 	addToCart(productItem);
@@ -55,12 +62,19 @@ const deleteProductFromCart = (id) => {
 	deleteFromCart(id);
 	cartView.render(state.cartItems);
 };
+const closeModal = () => {
+	modalView.closeModal();
+};
 const init = () => {
 	productsView.addRenderHandler(productsController);
 	categoriesView.addRenderHandler(categoriesController);
 	productsView.addToCartHandler(addToCartController);
+	productsView.viewProductHandler(viewProductController);
+	productView.addToCartHandler(addToCartController);
+	productView.closeModalHandler(closeModal);
 	cartView.addToCartHandler(addToCartController);
 	cartView.removeFromCartHandler(removeFromCartController);
 	cartView.deleteFromCartHandler(deleteProductFromCart);
 };
+
 init();

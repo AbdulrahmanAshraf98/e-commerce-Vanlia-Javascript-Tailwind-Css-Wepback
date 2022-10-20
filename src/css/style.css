@@ -11,8 +11,22 @@
         @apply
         bg-btn
     }
+    .modal{
+        @apply
+        fixed top-0 left-0 
+        w-full h-full 
+        z-40 
+        opacity-0  -translate-y-full   duration-500 
+    }
+    .modal.show{
+        @apply
+        opacity-100  translate-y-0 
+    }
+    .modal .overlay{
+        @apply
+        bg-cart  top-0 left-0  w-full
+    }
     .cart{
-
         visibility:hidden;
         @apply
         fixed top-0 left-0 
@@ -38,11 +52,11 @@
     .product-card{
         @apply  my-4 shadow-md shadow-neutral-700
     }
-    .product-card .product-image {
+     .product-image {
         @apply
         overflow-hidden rounded-t-md h-80
     }
-    .product-card .product-details{
+    .product-card  .product-details{
         border-top-right-radius: 40%;
         @apply
         text-white py-8 px-4 bg-black 
@@ -60,7 +74,7 @@
         mt-3
         text-lg text-gray-500  
     }
-    .product-card .product-product-details p{
+     .product-product-details p{
         @apply
         text-sm text-gray-500 mt-3
     }
