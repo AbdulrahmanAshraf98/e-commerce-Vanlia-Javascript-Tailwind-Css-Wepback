@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components{
+    .btn{
+        @apply
+        px-4 py-2  text-white border-none rounded-md
+    }
+    .btn.primary{
+        @apply
+        bg-btn
+    }
+    .product-card{
+        @apply  my-4
+    }
+    .product-card .product-image {
+        @apply
+        overflow-hidden rounded-t-md h-80
+    }
+    .product-card .product-details{
+        border-top-right-radius: 40%;
+        @apply
+        text-white py-8 px-4 bg-black 
+    }
+    .product-title {
+        @apply 
+        text-3xl text-white
+    }
+    .product-category{
+        @apply
+        text-lg text-gray-300
+    }
+    .product-desc{
+        @apply
+        mt-3
+        text-lg text-gray-500  
+    }
+    .product-card .product-product-details p{
+        @apply
+        text-sm text-gray-500 mt-3
+    }
+
+    /* .product-price{
+        @apply
+        text-xl  my-2
+    } */
+  
+}

@@ -30,13 +30,13 @@ const getProduct = (id) => {
 	return productItem;
 };
 const filterByCategoryHandler = async (categoryName) => {
-	if (categoryName === "ALl") {
+	if (categoryName === "All") {
 		await loadProducts();
 	} else {
 		await getProductsByCategory(categoryName);
 	}
-
 	productsView.render(state.productsData);
+	categoriesView.render(state.Categories);
 };
 const addToCartController = (id) => {
 	const productItem = getProduct(id);

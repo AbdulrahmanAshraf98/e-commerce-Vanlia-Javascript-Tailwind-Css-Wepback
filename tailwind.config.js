@@ -4,7 +4,7 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				btn: "#2879fe",
+				btn: "#35353f",
 				cart: "rgba(0,0,0,.5);",
 			},
 		},
