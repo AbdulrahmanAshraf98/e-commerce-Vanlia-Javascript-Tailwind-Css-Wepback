@@ -17,10 +17,10 @@ import productView from "./Views/productView";
 
 const productsController = async () => {
 	try {
-		const categoryName = window.location.hash.slice(1).replace("%20", " ");
+		const id = window.location.hash.slice(1);
 		productsView.renderSpinner();
-		if (!categoryName || categoryName === "All") await loadProducts();
-		else await getProductsByCategory(categoryName);
+		if (!id || +id === 0) await loadProducts();
+		else await getProductsByCategory(id);
 		productsView.render(state.productsData);
 		categoriesView.render(state.Categories);
 	} catch (error) {

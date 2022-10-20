@@ -12,18 +12,18 @@ class ProductView extends View {
         <section class="product py-4 sm:py-0">
             <div class="container m-auto px-4  sm:py-8 h-screen relative">
                 <button class="btn absolute top:0 left-5 sm:top-10 sm:left-10 close-model-btn mb-4 text-4xl text-gray-800">x</button>
-                <div class="flex flex-wrap gap-16 items-center h-screen  bg-white  p-8  overflow-y-auto overflow-x-hidden ">
+                <div class="flex flex-wrap gap-16 items-center h-full  bg-white  p-8  overflow-y-auto overflow-x-hidden ">
                     
                     <div class="w-full sm:w-3/12">
                         <div class="product-image  ">
-                            <img class="w-full h-full  object-contain" src="${productItem.image}"/>
+                            <img class="w-full h-full  object-contain" src="${productItem.images[0]}"/>
                         </div>
                     </div>
                     <div class="w-full sm:w-7/12">
                         <div class="product-info break-words">
                             <div class="product-details ">
                                 <h4 class="product-title text-gray-900">${productItem.title}</h4>   
-                                <span class="product-category inline-block mt-4">${productItem.category}</span>
+                                <span class="product-category inline-block mt-4">${productItem.category.name}</span>
                                 <p class="product-desc">${productItem.description}</p>
                                <div class="flex  items-center justify-between mt-3">  
                                 <p class="product-price">$${productItem.price}</p>

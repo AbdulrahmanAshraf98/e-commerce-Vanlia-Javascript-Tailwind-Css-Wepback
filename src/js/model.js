@@ -9,11 +9,13 @@ export const state = {
 export const loadProducts = async () => {
 	try {
 		const responseData = await fetchFromFakeStoreApi("products");
+		console.log(responseData);
 
 		state.productsData = responseData.map((product) => {
 			return {
 				...product,
 				price: parseInt(product.price),
+				image: product.images[0],
 			};
 		});
 	} catch (error) {
@@ -30,21 +32,23 @@ export const loadProductDetails = async (id) => {
 };
 export const getALlCategories = async () => {
 	try {
-		const responseData = await fetchFromFakeStoreApi("products/categories");
-		state.Categories = responseData;
+		const responseData = await fetchFromFakeStoreApi("categories");
+		console.log(responseData);
+		state.Categories = responseData.slice(0, 5);
 	} catch (error) {
 		throw new Error(error.message);
 	}
 };
-export const getProductsByCategory = async (categoryName) => {
+export const getProductsByCategory = async (id) => {
 	try {
 		const responseData = await fetchFromFakeStoreApi(
-			`products/category/${categoryName}`,
+			`categories/${id}/products`,
 		);
 		state.productsData = responseData.map((product) => {
 			return {
 				...product,
 				price: parseInt(product.price),
+				image: product.images[0],
 			};
 		});
 	} catch (error) {

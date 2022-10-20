@@ -19,7 +19,7 @@ class ProductsView extends View {
         <div class="product-details ">
 			<h4 class="product-title ">${productItem.title.slice(0, 10)}</h4>
 			
-            <span class="product-category">${productItem.category}</span>
+            <span class="product-category">${productItem.category.name}</span>
 			<p class="product-desc">${productItem.description.slice(0, 100)}</p>
            <div class="flex  items-center justify-between mt-3">  
 		    <p class="product-price">$${productItem.price}</p>
