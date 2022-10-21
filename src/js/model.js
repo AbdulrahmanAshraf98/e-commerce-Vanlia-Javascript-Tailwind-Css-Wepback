@@ -9,7 +9,6 @@ export const state = {
 export const loadProducts = async () => {
 	try {
 		const responseData = await fetchFromFakeStoreApi("products");
-		console.log(responseData);
 
 		state.productsData = responseData.map((product) => {
 			return {
@@ -33,7 +32,6 @@ export const loadProductDetails = async (id) => {
 export const getALlCategories = async () => {
 	try {
 		const responseData = await fetchFromFakeStoreApi("categories");
-		console.log(responseData);
 		state.Categories = responseData.slice(0, 5);
 	} catch (error) {
 		throw new Error(error.message);
