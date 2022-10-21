@@ -116,6 +116,7 @@ class ProductView extends View {
 			if (!btn) return;
 			handler();
 			clearInterval(this.clearInterval);
+            this.currentImageIndex = 0;
 		});
 	}
 }
