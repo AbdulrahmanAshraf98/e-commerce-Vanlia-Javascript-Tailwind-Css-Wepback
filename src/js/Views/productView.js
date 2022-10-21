@@ -9,7 +9,6 @@ class ProductView extends View {
 	}
 	_generateMarkup() {
 		this.clearInterval = this._changeImageAuto();
-
 		return this._generateMarkupView(this._data);
 	}
 	_generateMarkupView(productItem) {
@@ -77,8 +76,6 @@ class ProductView extends View {
 				else if (this.currentImageIndex === images.length - 1)
 					this.currentImageIndex = 0;
 				const currentImage = this._parentElement.querySelector(".currentImage");
-				// currentImage.classList.remove("animate-fade");
-				// currentImage.classList.add("animate-fade");
 				currentImage.src = images[this.currentImageIndex];
 				this._activeImageStyle();
 			}
@@ -92,6 +89,7 @@ class ProductView extends View {
 			this._parentElement.querySelector(".currentImage").src =
 				this._data.images[this.currentImageIndex];
 			this._activeImageStyle();
+
 			this._time = 3000;
 		});
 	}
@@ -104,6 +102,7 @@ class ProductView extends View {
 				image.classList.remove("blur-sm");
 		});
 	}
+
 	addToCartHandler(handler) {
 		this._parentElement.addEventListener("click", (event) => {
 			const btn = event.target.closest(".addToCart-btn");

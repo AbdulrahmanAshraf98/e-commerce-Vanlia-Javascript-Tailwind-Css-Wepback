@@ -23,7 +23,7 @@ class ProductsView extends View {
 			<p class="product-desc">${productItem.description.slice(0, 100)}</p>
            <div class="flex  items-center justify-between mt-3">  
 		    <p class="product-price">$${productItem.price}</p>
-            <button class="view-product-btn btn text-white"data-id="${
+            <button class="view-product-btn btn hover:bg-pink-500 duration-500 text-white"data-id="${
 							productItem.id
 						}"><svg class="w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
 						<button class="addToCart-btn btn primary"data-id="${
