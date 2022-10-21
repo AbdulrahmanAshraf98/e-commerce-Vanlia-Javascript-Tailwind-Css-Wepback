@@ -64,7 +64,7 @@ class ProductView extends View {
 				(image, index) =>
 					`<img class="image cursor-pointer w-32 h-auto  object-contain ${
 						index === 0 ? "" : "blur-sm"
-					} " src=${image} data-id=${index} />`,
+					} hover:blur-0 duration-300 " src=${image} data-id=${index} />`,
 			)
 			.join("")}`;
 	}
