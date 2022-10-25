@@ -5,6 +5,9 @@
 
     body{
       overflow-x: hidden;
+      @apply
+      relative
+      bg-background-main dark:bg-background-dark
     }
     ::-webkit-scrollbar {
     
@@ -27,6 +30,7 @@
       
     }
   }
+
 @layer components{
 
     .btn{
@@ -35,7 +39,7 @@
     }
     .btn.primary{
         @apply
-        bg-btn
+        bg-main-light
     }
     .modal{
         @apply
@@ -50,14 +54,14 @@
     }
     .modal .overlay{
         @apply
-        bg-cart  top-0 left-0  w-full
+        bg-overlay top-0 left-0  w-full
     }
     .cart{
         visibility:hidden;
         @apply
         fixed top-0 left-0 
         h-full w-full 
-        bg-cart
+        bg-overlay
         opacity-0  translate-x-full   duration-500 
     }
     .cart.show{
@@ -68,16 +72,23 @@
     }
     .cart .cart__content{
         @apply 
-        w-80 h-full
+        w-full sm:w-80 h-full
         absolute right-0 top-0
         px-8 py-4
         flex flex-col
-        bg-white 
+        bg-white dark:text-white dark:bg-main-dark   
         overflow-y-auto
     }
+
     .product-card{
-        @apply  my-4 shadow-md shadow-neutral-700
+        @apply  
+        my-4
+        dark:bg-main-dark
+         dark:text-white 
+        shadow-md shadow-productCard-main dark:shadow-productCard-dark  hover:shadow-productCardHover
+        duration-500
     }
+
      .product-image {
         @apply
         overflow-hidden rounded-t-md h-80
@@ -85,29 +96,25 @@
     .product-card  .product-details{
         border-top-right-radius: 40%;
         @apply
-        text-white py-8 px-4 bg-black 
+       py-8 px-4 text-gray-600 dark:text-white
     }
     .product-title {
         @apply 
-        text-3xl text-white
+        text-3xl 
     }
     .product-category{
         @apply
-        text-lg text-gray-300
+        text-lg text-gray-500 dark:text-gray-400
     }
     .product-desc{
         @apply
         mt-3
-        text-lg text-gray-500  
+        text-lg text-gray-500   dark:text-gray-400
     }
      .product-product-details p{
         @apply
         text-sm text-gray-500 mt-3
     }
 
-    /* .product-price{
-        @apply
-        text-xl  my-2
-    } */
   
 }

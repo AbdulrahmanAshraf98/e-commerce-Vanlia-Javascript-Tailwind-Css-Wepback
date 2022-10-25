@@ -8,9 +8,21 @@ const htmlPluginOptions = {
 	template: path.resolve(__dirname, "./src/index.html"),
 };
 module.exports = {
-	entry: "./src/js//controller.js",
+	entry: ["./src/js//controller.js"],
 	module: {
 		rules: [
+			{
+				test: /\.(png|jpe?g|gif|svg)$/i,
+				use: [
+					{
+						loader: "file-loader",
+					},
+				],
+			},
+			{
+				test: /\.svg$/,
+				loader: "svg-inline-loader",
+			},
 			{
 				test: /\.m?js$/,
 				exclude: /(node_modules|bower_components)/,
@@ -29,6 +41,7 @@ module.exports = {
 	},
 
 	plugins: [new HtmlWebpackPlugin(htmlPluginOptions)],
+
 	devServer: {
 		static: {
 			directory: path.join(__dirname, "public"),

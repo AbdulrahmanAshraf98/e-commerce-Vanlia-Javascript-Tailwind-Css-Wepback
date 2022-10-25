@@ -1,14 +1,23 @@
 import { fetchFromFakeStoreApi } from "./FetchFromApi";
+import { addToCart, deleteFromCart, removeFromCart } from "./Helpers/Cart/cart";
+import {
+	getALlCategories,
+	getAllProducts,
+	getProductsByCategory,
+} from "./model.service";
 
 export const state = {
 	productsData: [],
 	Categories: [],
 	productDetails: {},
-	cartItems: [],
+	cart: {
+		cartItems: [],
+		totalQuantity: 0,
+	},
 };
 export const loadProducts = async () => {
 	try {
-		const responseData = await fetchFromFakeStoreApi("products");
+		const responseData = await getAllProducts();
 
 		state.productsData = responseData.map((product) => {
 			return {
@@ -17,6 +26,7 @@ export const loadProducts = async () => {
 				image: product.images[0],
 			};
 		});
+		return state.productsData;
 	} catch (error) {
 		throw new Error(error.message);
 	}
@@ -29,19 +39,17 @@ export const loadProductDetails = async (id) => {
 		throw new Error(error.message);
 	}
 };
-export const getALlCategories = async () => {
+export const loadALlCategories = async () => {
 	try {
-		const responseData = await fetchFromFakeStoreApi("categories");
+		const responseData = await getALlCategories();
 		state.Categories = responseData.slice(0, 5);
 	} catch (error) {
 		throw new Error(error.message);
 	}
 };
-export const getProductsByCategory = async (id) => {
+export const loadProductsByCategory = async (id) => {
 	try {
-		const responseData = await fetchFromFakeStoreApi(
-			`categories/${id}/products`,
-		);
+		const responseData = await getProductsByCategory(id);
 		state.productsData = responseData.map((product) => {
 			return {
 				...product,
@@ -53,53 +61,37 @@ export const getProductsByCategory = async (id) => {
 		throw new Error(error.message);
 	}
 };
-export const addToCart = (productItem) => {
-	let newCartItems = [];
-	const existingCartItemIndex = state.cartItems.findIndex((cartItem) => {
-		return cartItem.id === productItem.id;
-	});
-	const existingCartItem = state.cartItems[existingCartItemIndex];
-	if (!existingCartItem) {
-		newCartItems = [...state.cartItems, { ...productItem, quantity: 1 }];
-	} else {
-		const updateExistingCartItem = {
-			...existingCartItem,
-			quantity: existingCartItem.quantity + 1,
-		};
-		newCartItems = [...state.cartItems];
-		newCartItems[existingCartItemIndex] = updateExistingCartItem;
-	}
-	state.cartItems = newCartItems;
-	localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+
+export const addItemToCart = (productItem) => {
+	const { cartItems } = state.cart;
+	let newCartItems = addToCart(productItem, cartItems);
+	state.cart.cartItems = newCartItems;
+	state.cart.totalQuantity = state.cart.totalQuantity + 1;
+
+	localStorage.setItem("cart", JSON.stringify(state.cart));
 };
-export const removeFromCart = (id) => {
-	let newCartItems = [];
-	const existingCartItemIndex = state.cartItems.findIndex(
-		(item) => item.id === +id,
-	);
-	const existingCartItem = state.cartItems[existingCartItemIndex];
-	if (existingCartItem.quantity > 1) {
-		const updateExistingCartItem = {
-			...existingCartItem,
-			quantity: existingCartItem.quantity - 1,
-		};
-		newCartItems = [...state.cartItems];
-		newCartItems[existingCartItemIndex] = updateExistingCartItem;
-	} else {
-		newCartItems = state.cartItems.filter((cartItem) => cartItem.id !== +id);
-	}
-	state.cartItems = newCartItems;
-	localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+
+export const removeItemFromCart = (id) => {
+	const { cartItems } = state.cart;
+	let newCartItems = removeFromCart(id, cartItems);
+	state.cart.cartItems = newCartItems;
+	state.cart.totalQuantity = state.cart.totalQuantity - 1;
+	localStorage.setItem("cart", JSON.stringify(state.cart));
 };
-export const deleteFromCart = (id) => {
-	const newCartItems = state.cartItems.filter(
-		(cartItem) => cartItem.id !== +id,
+
+export const deleteItemFromCart = (id) => {
+	const { cartItems } = state.cart;
+	state.cart.cartItems = deleteFromCart(id, cartItems);
+	state.cart.totalQuantity = state.cart.cartItems.reduce(
+		(accumulator, current) => {
+			return accumulator + current.quantity;
+		},
+		0,
 	);
-	state.cartItems = newCartItems;
-	localStorage.setItem("cartItems", JSON.stringify(newCartItems));
+	localStorage.setItem("cart", JSON.stringify(state.cart));
 };
 const init = () => {
-	const cartStorage = localStorage.getItem("cartItems");
-	if (cartStorage) state.cartItems = JSON.parse(cartStorage);
+	const cartStorage = localStorage.getItem("cart");
+	if (cartStorage) state.cart = JSON.parse(cartStorage);
 };
 init();

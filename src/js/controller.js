@@ -1,11 +1,12 @@
 import {
+	addItemToCart,
 	addToCart,
-	deleteFromCart,
-	getALlCategories,
-	getProductsByCategory,
+	deleteItemFromCart,
+	loadALlCategories,
 	loadProductDetails,
 	loadProducts,
-	removeFromCart,
+	loadProductsByCategory,
+	removeItemFromCart,
 	state,
 } from "./model";
 import "../css/style.css";
@@ -14,13 +15,14 @@ import categoriesView from "./Views/catogriesView";
 import cartView from "./Views/cartView";
 import modalView from "./Views/modalView";
 import productView from "./Views/productView";
+import navbarView from "./Views/navbarView";
 
 const productsController = async () => {
 	try {
 		const id = window.location.hash.slice(1);
 		productsView.renderSpinner();
 		if (!id || +id === 0) await loadProducts();
-		else await getProductsByCategory(id);
+		else await loadProductsByCategory(id);
 		productsView.render(state.productsData);
 		categoriesView.render(state.Categories);
 	} catch (error) {
@@ -29,7 +31,7 @@ const productsController = async () => {
 };
 const categoriesController = async () => {
 	try {
-		await getALlCategories();
+		await loadALlCategories();
 		categoriesView.render(state.Categories);
 	} catch (error) {
 		categoriesView.renderErrorMessage(error);
@@ -53,32 +55,41 @@ const viewProductController = async (id) => {
 		productView.renderErrorMessage(error);
 	}
 };
-const addToCartController = (id) => {
+const addProductToCartController = (id) => {
 	const productItem = getProduct(id);
-	addToCart(productItem);
-	cartView.render(state.cartItems);
-	cartView.openCart();
+	addItemToCart(productItem);
+	cartView.render(state.cart);
+	navbarView.render(state.cart.totalQuantity);
 };
-const removeFromCartController = (id) => {
-	removeFromCart(id);
-	cartView.render(state.cartItems);
+
+const removeProductFromCartController = (id) => {
+	removeItemFromCart(id);
+	cartView.render(state.cart);
+	navbarView.render(state.cart.totalQuantity);
 };
 const deleteProductFromCart = (id) => {
-	deleteFromCart(id);
-	cartView.render(state.cartItems);
+	deleteItemFromCart(id);
+	cartView.render(state.cart);
+	navbarView.render(state.cart.totalQuantity);
 };
 const closeModal = () => {
 	modalView.closeModal();
 };
+const openCartController = () => {
+	cartView.render(state.cart);
+	cartView.openCart();
+};
 const init = () => {
-	productsView.addRenderHandler(productsController);
+	navbarView.render(state.cart.totalQuantity);
+	navbarView.openCartHandler(openCartController);
 	categoriesView.addRenderHandler(categoriesController);
-	productsView.addToCartHandler(addToCartController);
+	productsView.addRenderHandler(productsController);
+	productsView.addToCartHandler(addProductToCartController);
 	productsView.viewProductHandler(viewProductController);
-	productView.addToCartHandler(addToCartController);
+	productView.addToCartHandler(addProductToCartController);
 	productView.closeModalHandler(closeModal);
-	cartView.addToCartHandler(addToCartController);
-	cartView.removeFromCartHandler(removeFromCartController);
+	cartView.addToCartHandler(addProductToCartController);
+	cartView.removeFromCartHandler(removeProductFromCartController);
 	cartView.deleteFromCartHandler(deleteProductFromCart);
 };
 

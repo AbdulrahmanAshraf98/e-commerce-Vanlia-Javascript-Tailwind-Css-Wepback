@@ -12,22 +12,19 @@ class Cart extends View {
 		return `
         <aside class="cart__content ">
         <div class="cart__heading my-4 flex gap-4 items-center">
-            <div class="cart__title text-2xl text-gray-700 font-bold ">Cart</div>
-            <div class="cart__total text-lg text-gray-500 ">${cart.reduce(
-							(accumulator, current) => {
-								return accumulator + current.quantity;
-							},
-							0,
-						)}</div>
+            <div class="cart__title text-2xl text-gray-700 dark:text-white font-bold ">Cart</div>
+            <div class="cart__total text-lg text-gray-500 dark:text-white">${
+							cart.totalQuantity
+						}</div>
             <div class="cart__close flex-1 mr-auto text-right ">
-                <button class="btn close-btn text-black text-2xl" >x</button>
+                <button class="btn close-btn text-black dark:text-white" text-2xl" >x</button>
             </div>
         </div>
         <div class="cart__items ">
-           ${cart.map(this._generateCartItemsMarkup).join("")}
+           ${cart.cartItems.map(this._generateCartItemsMarkup).join("")}
         </div>
         <div class="cart__footer mt-auto">
-            <h3 class="text-2xl flex justify-between">Total <span>${cart.reduce(
+            <h3 class="text-2xl flex justify-between">Total <span>${cart.cartItems.reduce(
 							(accumulator, current) => {
 								return accumulator + current.price * current.quantity;
 							},

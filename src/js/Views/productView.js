@@ -15,8 +15,8 @@ class ProductView extends View {
 		return `
         <section class="product py-4 sm:py-0">
             <div class="container m-auto px-4  sm:py-8 h-screen relative">
-                <button class="btn absolute top:0 left-5 sm:top-10 sm:left-10 close-model-btn mb-4 text-4xl text-gray-800">x</button>
-                <div class="flex flex-wrap gap-16 items-center h-full  bg-white  p-8  overflow-y-auto overflow-x-hidden ">
+                <button class="btn absolute top:0 right-5 sm:top-10 sm:left-10 close-model-btn mb-4 text-4xl text-gray-800 dark:text-white">x</button>
+                <div class="flex flex-wrap gap-16 items-center h-full  bg-white dark:bg-main-dark  p-8  overflow-y-auto overflow-x-hidden ">
                     
                     <div class="w-full lg:w-6/12 overflow-x-hidden">
                         <div class="product-images  ">
@@ -32,16 +32,16 @@ class ProductView extends View {
                     <div class="w-full  lg:w-5/12 ">
                         <div class="product-info break-words">
                             <div class="product-details ">
-                                <h4 class="product-title text-gray-900">${
+                                <h4 class="product-title text-gray-900 dark:text-white">${
 																	productItem.title
 																}</h4>   
-                                <span class="product-category text-gray-700 inline-block mt-4">${
+                                <span class="product-category text-gray-700 dark:text-grey-300 inline-block mt-4">${
 																	productItem.category.name
 																}</span>
                                 <p class="product-desc">${
 																	productItem.description
 																}</p>
-                               <div class="flex  items-center justify-between mt-3">  
+                               <div class="flex  items-center justify-between mt-3 dark:text-white">  
                                 <p class="product-price">$${
 																	productItem.price
 																}</p>
