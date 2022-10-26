@@ -59,18 +59,18 @@ const addProductToCartController = (id) => {
 	const productItem = getProduct(id);
 	addItemToCart(productItem);
 	cartView.render(state.cart);
-	navbarView.render(state.cart.totalQuantity);
+	navbarView.updateTotalCount(state.cart.totalQuantity);
 };
 
 const removeProductFromCartController = (id) => {
 	removeItemFromCart(id);
 	cartView.render(state.cart);
-	navbarView.render(state.cart.totalQuantity);
+	navbarView.updateTotalCount(state.cart.totalQuantity);
 };
 const deleteProductFromCart = (id) => {
 	deleteItemFromCart(id);
 	cartView.render(state.cart);
-	navbarView.render(state.cart.totalQuantity);
+	navbarView.updateTotalCount(state.cart.totalQuantity);
 };
 const closeModal = () => {
 	modalView.closeModal();

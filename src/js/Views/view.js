@@ -9,30 +9,7 @@ export default class View {
 		this._clear();
 		this._parentElement.insertAdjacentHTML("afterbegin", markup);
 	}
-	update(data) {
-		this._data = data;
-		const newMarkup = this._generateMarkup();
-		const newDOm = document.createRange().createContextualFragment(newMarkup);
-		const newDomElements = Array.from(newDOm.querySelectorAll('*'));
-		const currentElements = Array.from(
-		  this._parentElement.querySelectorAll('*')
-		);
-		newDomElements.forEach((newElement, index) => {
-		  const currentElement = currentElements[index];
-		  if (
-			!newElement.isEqualNode(currentElement) &&
-			newElement.firstChild &&
-			newElement.firstChild.nodeValue.trim() !== ''
-		  ) {
-			currentElement.textContent = newElement.textContent;
-		  }
-		  if (!newElement.isEqualNode(currentElement)) {
-			Array.from(newElement.attributes).forEach(attribute => {
-			  currentElement.setAttribute(attribute.name, attribute.value);
-			});
-		  }
-		});
-	  }
+
 	renderSpinner() {
 		const spinnerMarkup = `<div class="spinner flex justify-center items-center w-full h-full">
 		<div role="status">
