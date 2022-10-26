@@ -1,7 +1,4 @@
 import View from "./view";
-import cartImage from "../../assets/logo.svg";
-// var cartImage = require("../../assets/logo.svg");
-console.log(cartImage);
 class NavbarView extends View {
 	constructor() {
 		super(document.querySelector(".nav-content"));

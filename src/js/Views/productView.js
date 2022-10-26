@@ -15,7 +15,7 @@ class ProductView extends View {
 		return `
         <section class="product py-4 sm:py-0">
             <div class="container m-auto px-4  sm:py-8 h-screen relative">
-                <button class="btn absolute top:0 right-5 sm:top-10 sm:left-10 close-model-btn mb-4 text-4xl text-gray-800 dark:text-white">x</button>
+                <button class="btn absolute top:0 right-5 sm:top-10 sm:right-10 close-model-btn mb-4 text-4xl text-gray-800 dark:text-white">x</button>
                 <div class="flex flex-wrap gap-16 items-center h-full  bg-white dark:bg-main-dark  p-8  overflow-y-auto overflow-x-hidden ">
                     
                     <div class="w-full lg:w-6/12 overflow-x-hidden">
