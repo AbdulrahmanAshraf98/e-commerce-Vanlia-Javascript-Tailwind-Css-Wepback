@@ -4,7 +4,13 @@ import {
 	getAllProducts,
 	getProductsByCategory,
 } from "../../model.service";
-global.fetch = fetch;
+
+beforeAll(() => {
+	global.fetch = fetch;
+});
+afterAll(() => {
+	global.fetch = undefined;
+});
 describe("getAllProducts", () => {
 	it("should return  All products", async () => {
 		const products = await getAllProducts();
