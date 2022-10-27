@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 @layer base{
-
     body{
       overflow-x: hidden;
       @apply
@@ -43,13 +42,14 @@
     }
     .modal{
         @apply
-        fixed top-0 left-0 
+        fixed -top-full left-0 
         w-full h-full 
         z-40 
-        opacity-0  -translate-y-full   duration-500 
+        opacity-0  -translate-y-full   duration-700
     }
     .modal.show{
         @apply
+        top-0
         opacity-100  translate-y-0 
     }
     .modal .overlay{
