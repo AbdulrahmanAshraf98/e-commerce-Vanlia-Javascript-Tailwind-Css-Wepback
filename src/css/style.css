@@ -83,8 +83,9 @@
     .product-card{
         @apply  
         my-4
+        rounded-2xl
         dark:bg-main-dark
-         dark:text-white 
+        dark:text-white 
         shadow-md shadow-productCard-main dark:shadow-productCard-dark  hover:shadow-productCardHover
         duration-500
     }
@@ -94,7 +95,6 @@
         overflow-hidden rounded-t-md h-80
     }
     .product-card  .product-details{
-        border-top-right-radius: 40%;
         @apply
        py-8 px-4 text-gray-600 dark:text-white
     }
